@@ -13,7 +13,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "."
+  "homepage": ".",
+  "react-scripts": {
+    "html": "index.html"
+  },
   "devDependencies": {
     "react-scripts": "^5.0.1"
   },
