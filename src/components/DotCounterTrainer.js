@@ -295,53 +295,34 @@ const DotCounterTrainer = () => {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, size, size);
     
-    const shapes = [];
+    const dots = [];
     let attempts = 0;
     const maxAttempts = 1000;
     
-    while (shapes.length < numShapes && attempts < maxAttempts) {
+    while (dots.length < numShapes && attempts < maxAttempts) {
       const x = rng.random() * (size - 2 * shapeSize) + shapeSize;
       const y = rng.random() * (size - 2 * shapeSize) + shapeSize;
-      const shapeType = Math.floor(rng.random() * 3);
-      
       let valid = true;
       if (!allowOverlap) {
-        for (const shape of shapes) {
-          const dist = Math.sqrt((x - shape.x) * (x - shape.x) + (y - shape.y) * (y - shape.y));
+        for (const dot of dots) {
+          const dist = Math.sqrt((x - dot.x) * (x - dot.x) + (y - dot.y) * (y - dot.y));
           if (dist < 2 * shapeSize) {
             valid = false;
             break;
           }
         }
       }
-      
       if (valid) {
-        shapes.push({ x: x, y: y, type: shapeType });
+        dots.push({ x: x, y: y });
       }
       attempts++;
     }
-    
     ctx.fillStyle = 'white';
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
-    
-    for (const shape of shapes) {
-      if (shape.type === 0) {
-        ctx.beginPath();
-        ctx.arc(shape.x, shape.y, shapeSize, 0, 2 * Math.PI);
-        ctx.fill();
-      } else if (shape.type === 1) {
-        ctx.fillRect(shape.x - shapeSize, shape.y - shapeSize, shapeSize * 2, shapeSize * 2);
-      } else {
-        ctx.beginPath();
-        ctx.moveTo(shape.x, shape.y - shapeSize);
-        ctx.lineTo(shape.x - shapeSize, shape.y + shapeSize);
-        ctx.lineTo(shape.x + shapeSize, shape.y + shapeSize);
-        ctx.closePath();
-        ctx.fill();
-      }
+    for (const dot of dots) {
+      ctx.beginPath();
+      ctx.arc(dot.x, dot.y, shapeSize, 0, 2 * Math.PI);
+      ctx.fill();
     }
-    
     return canvas;
   };
 
