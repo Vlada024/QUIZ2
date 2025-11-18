@@ -11,13 +11,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-  "homepage": ".",
-  "react-scripts": {
-    "html": "index.html"
-  },
+  "homepage": "https://Vlada024.github.io/QUIZ2",
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "react-scripts": "^5.0.1"
   },
   "browserslist": {
